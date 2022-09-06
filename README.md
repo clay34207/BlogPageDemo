@@ -1,6 +1,3 @@
-# test
-# test
-# test
-# Blog_Page
-# Blog_Page
-# final
+# To run
+Clone this repository, then navigate to the angular-app folder in Terminal and run ng-serve.
+
