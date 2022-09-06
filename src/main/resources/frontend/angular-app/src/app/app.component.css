@@ -1,5 +1,6 @@
+
 .dropdown-menu {
-position:relative;
+  position:relative;
   max-height: 34vh;
   overflow-y: auto;
   text-align:center;
@@ -10,20 +11,20 @@ position:relative;
   position:relative;
 }
 #blogs {
-padding-top:1%;
-    width: 100%;
-    overflow-y: auto;
-     height: 60vh;
+  padding-top:1%;
+  width: 100%;
+  overflow-y: auto;
+  height: 60vh;
 }
-#section-one {
+#top-banner {
   background-color: #C70000;
-
   height: 40vh;
   overflow: visible;
   width: 100%;
 }
 
-#toptext {
+#banner-text {
+ padding-top: 2%;
  text-align:center;
  color:white;
  font-family: 'Helvetica';
@@ -32,11 +33,9 @@ padding-top:1%;
 
 #dropdown {
   position:relative;
-  text-align-last:center;
   display: block;
   margin: 0 auto;
   max-height: 34vh;
-  overflow-y: auto;
   text-align:center;
   width: 30%;
   margin-top: 2.5%;
@@ -44,15 +43,10 @@ padding-top:1%;
 }
 
 #searchBtn {
-  margin-top:5%;
-}
-#datalistOptions {
-float:right;}
-#emptyMessage {
-  visibility:hidden;
+  margin-top:7%;
 }
 
-#left{
+#author{
 float:left;
 }
 
@@ -60,9 +54,7 @@ float:left;
 float:right;
 }
 
-#post {
 
-}
 
 
 

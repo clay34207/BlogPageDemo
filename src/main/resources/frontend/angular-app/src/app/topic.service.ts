@@ -19,7 +19,6 @@ private apiServerUrl = environment.apiBaseUrl;
 
    public loadBlogs(topic: String): Observable<Post[]> { // Get blog posts that belong to a given topic
     return this.http.get<Post[]>(`${this.apiServerUrl}/blog/topic/${topic}`)
-
    }
 
    public getAllBlogs(): Observable<Post[]> { // Get all blog posts

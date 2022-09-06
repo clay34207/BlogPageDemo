@@ -25,7 +25,6 @@ export class AppComponent implements OnInit {
 async ngOnInit() {
    this.getAllBlogs(); // Load all blogs by default
    this.getTopics(); // Load blog topics for the dropdown
-   this.topics = this.topics.filter((x, i, a) => a.indexOf(x) == i)
  }
 
 public getAllBlogs() { // Returns all of the blog posts from the CSV file, regardless of topic
@@ -46,9 +45,8 @@ public getTopics(): void { // Return the result of the API call in an array and 
 
    this.topicService.getTopics().subscribe(
     (response:Topic[])=> {
-    response = Array.from(response.reduce((m, t) => m.set(t.Name, t), new Map()).values());
+    response = [...new Map(response.map(topic => [topic.Name, topic])).values()] //Borrowed this line from StackOverflow. Removes duplicates.
     this.topics = response;
-
   },
   (error:HttpErrorResponse) => {
   alert(error.message);
@@ -59,9 +57,8 @@ public getTopics(): void { // Return the result of the API call in an array and 
 public loadBlogs(topic: String): void {
   this.topicService.loadBlogs(topic).subscribe(
       (response:Post[])=> {
-       this.posts = response;
+      this.posts = response;
       this.showMessageIfEmpty(response.length); // display a message if there are no blogs for the selected topic
-      this.currentVal = topic;
       this.page = 1;
     },
     (error:HttpErrorResponse) => {

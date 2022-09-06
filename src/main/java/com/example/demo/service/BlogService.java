@@ -1,10 +1,8 @@
 package com.example.demo.service;
-
 import com.example.demo.DAO.BlogDAO;
 import com.example.demo.model.BlogPost;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,7 +25,5 @@ public class BlogService {
         }
         catch (Exception e){}
         return new ArrayList<BlogPost>();
-
     }
-
 }
