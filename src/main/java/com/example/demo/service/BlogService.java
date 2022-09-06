@@ -2,7 +2,6 @@ package com.example.demo.service;
 
 import com.example.demo.DAO.BlogDAO;
 import com.example.demo.model.BlogPost;
-import com.example.demo.model.BlogTopic;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,24 +13,15 @@ public class BlogService {
     @Autowired
     private BlogDAO blogDAO;
 
-    public BlogTopic[] getTopics() {
-        try{
-            return blogDAO.getTopics();
-        }
-        catch (Exception e) {}
-        return new BlogTopic[]{};
-    }
-
-
-    public List<BlogPost> getBlog(String blogTopic) {
+    public List<BlogPost> loadBlogs(String blogTopic) { // Gets all blog posts that belong to a given topic
         try {
-            return blogDAO.getBlog(blogTopic);
+            return blogDAO.loadBlogs(blogTopic);
         }
         catch (Exception e){}
         return new ArrayList<BlogPost>();
     }
 
-    public List<BlogPost> getAllBlogs() {
+    public List<BlogPost> getAllBlogs() { // Gets all blog posts
         try {
             return blogDAO.getAllBlogs();
         }

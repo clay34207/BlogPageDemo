@@ -26,11 +26,7 @@ public class BlogDAO {
 
 
 
-    public List<BlogPost> getBlog(String blogTopic) throws Exception{
-        if(blogTopic.equals("All")) {
-            return getAllBlogs();
-        }
-
+    public List<BlogPost> loadBlogs(String blogTopic) throws Exception{
         List<BlogPost> list = new ArrayList<BlogPost>();
         try (Reader reader = Files.newBufferedReader(Path.of("/Users/claymallory/Desktop/demo/src/main/java/com/example/demo/blogs.csv"))) {
             try (CSVReader csvReader = new CSVReader(reader)) {

@@ -13,23 +13,16 @@ private apiServerUrl = environment.apiBaseUrl;
 
   constructor(private http: HttpClient) { }
 
-  public getTopics(): Observable<Topic[]>{
+  public getTopics(): Observable<Topic[]>{ // Get the data from the API
    return this.http.get<Topic[]>('https://wexnermedical.osu.edu/blog/topics?blogId=F88D7CA3-2E58-4A80-AEFE-A0755FCD491D')
    }
 
-   public getPost(topic: String): Observable<Post[]> {
-   console.log('here')
+   public loadBlogs(topic: String): Observable<Post[]> { // Get blog posts that belong to a given topic
     return this.http.get<Post[]>(`${this.apiServerUrl}/blog/topic/${topic}`)
 
    }
 
-   public getAllBlogs(): Observable<Post[]> {
-      console.log('here')
-       return this.http.get<Post[]>(`${this.apiServerUrl}/blog/allBlogs`)
-
-      }
-
-
-
-
+   public getAllBlogs(): Observable<Post[]> { // Get all blog posts
+     return this.http.get<Post[]>(`${this.apiServerUrl}/blog/allBlogs`)
+     }
 }

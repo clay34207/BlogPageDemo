@@ -1,10 +1,14 @@
 .dropdown-menu {
 position:relative;
-  max-height: 29vh;
+  max-height: 34vh;
   overflow-y: auto;
   text-align:center;
+  width: 100%;
 }
 
+#datalistOptions {
+  position:relative;
+}
 #blogs {
 padding-top:1%;
     width: 100%;
@@ -31,9 +35,19 @@ padding-top:1%;
   text-align-last:center;
   display: block;
   margin: 0 auto;
-  width:80%;
+  max-height: 34vh;
+  overflow-y: auto;
+  text-align:center;
+  width: 30%;
+  margin-top: 2.5%;
+
 }
 
+#searchBtn {
+  margin-top:5%;
+}
+#datalistOptions {
+float:right;}
 #emptyMessage {
   visibility:hidden;
 }

@@ -1,7 +1,6 @@
 package com.example.demo.controller;
 
 import com.example.demo.model.BlogPost;
-import com.example.demo.model.BlogTopic;
 import com.example.demo.service.BlogService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,22 +20,16 @@ public class BlogController {
         this.blogService = blogService;
     }
 
-    @GetMapping("/topics")
-    public ResponseEntity<BlogTopic[]> getTopics(@PathVariable("topic") String blogTopic) {
-            BlogTopic[] topics = blogService.getTopics();
-            return new ResponseEntity<BlogTopic[]>(topics, HttpStatus.OK);
-    }
-
     @GetMapping("/allBlogs")
-    public ResponseEntity<List<BlogPost>> getAllBlogs() throws Exception{
+    public ResponseEntity<List<BlogPost>> getAllBlogs() throws Exception{ // Returns all blogs
         List<BlogPost> blogs = blogService.getAllBlogs();
         return new ResponseEntity<List<BlogPost>>(blogs, HttpStatus.OK);
     }
 
 
     @GetMapping("/topic/{topic}")
-    public ResponseEntity<List<BlogPost>> getBlog(@PathVariable("topic") String blogTopic) throws Exception {
-            List<BlogPost> post = blogService.getBlog(blogTopic);
-            return new ResponseEntity<List<BlogPost>>(post, HttpStatus.OK);
+    public ResponseEntity<List<BlogPost>> loadBlogs(@PathVariable("topic") String blogTopic) throws Exception { // Returns all blogs that belong to a given topic
+        List<BlogPost> post = blogService.loadBlogs(blogTopic);
+        return new ResponseEntity<List<BlogPost>>(post, HttpStatus.OK);
     }
 }

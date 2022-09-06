@@ -1,17 +1,10 @@
 package com.example.demo.model;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import java.io.Serializable;
-import java.util.Date;
 
 @Entity
 public class BlogPost implements Serializable {
-
-    @Id
-    @GeneratedValue
-    private Long id;
     private String title;
     private String description;
     private String author;
@@ -25,14 +18,6 @@ public class BlogPost implements Serializable {
         this.author = author;
         this.topic = topic;
         this.datePublished = datePublished;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getTitle() {

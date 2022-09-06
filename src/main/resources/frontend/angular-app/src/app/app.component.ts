@@ -1,13 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import {ChangeDetectorRef} from '@angular/core';
-import { Topic } from './topic'
-import { Post } from './post'
-import { TopicService } from './topic.service'
+import { Topic } from './topic';
+import { Post } from './post';
+import { TopicService } from './topic.service';
 import { HttpErrorResponse } from '@angular/common/http';
-import {MatSelectModule} from '@angular/material/select';
-import { MatFormFieldModule } from '@angular/material/form-field';
-
 
 @Component({
   selector: 'app-root',
@@ -23,31 +18,22 @@ export class AppComponent implements OnInit {
   public page: number = 1;
   public currentVal: String = "All";
   count: number = 0;
-    tableSize: number = 6;
-    tableSizes: any = [3, 6, 9, 12];
-  constructor(private topicService:TopicService, private route: Router, private ref:ChangeDetectorRef){}
+  blogsPerPage: number = 6; // The maximum number of blog posts that can be shown per page
+  constructor(private topicService:TopicService){}
 
 
 async ngOnInit() {
-   this.getAllBlogs();
-   this.getTopics();
-     this.topics = this.topics.filter((x, i, a) => a.indexOf(x) == i)
-    alert(this.topics)
-
+   this.getAllBlogs(); // Load all blogs by default
+   this.getTopics(); // Load blog topics for the dropdown
+   this.topics = this.topics.filter((x, i, a) => a.indexOf(x) == i)
  }
 
-
- public showMessage(len: number){
- alert(len)
-
- }
-
-public getAllBlogs() {
+public getAllBlogs() { // Returns all of the blog posts from the CSV file, regardless of topic
   this.topicService.getAllBlogs().subscribe(
   (response: Post[])=> {
     this.posts = response;
-    this.currentVal = "All";
-     this.showMessageIfEmpty(response.length);
+    this.showMessageIfEmpty(response.length); // Show a message if there are no blog posts
+    this.page = 1;
 
   },
   (error:HttpErrorResponse) => {
@@ -56,19 +42,7 @@ public getAllBlogs() {
   );
  }
 
- public getPost(topic: String) {
-  this.topicService.getPost(topic).subscribe(
-  (response: Post[])=> {
-    this.posts = response;
-  },
-  (error:HttpErrorResponse) => {
-    alert(error.message);
-    }
-
-  );
- }
-
-public async getTopics(): Promise<void> {
+public getTopics(): void { // Return the result of the API call in an array and remove duplicates
 
    this.topicService.getTopics().subscribe(
     (response:Topic[])=> {
@@ -80,20 +54,18 @@ public async getTopics(): Promise<void> {
   alert(error.message);
   }
   );
-
-
 }
 
-
 public loadBlogs(topic: String): void {
-  this.topicService.getPost(topic).subscribe(
+  this.topicService.loadBlogs(topic).subscribe(
       (response:Post[])=> {
        this.posts = response;
-      this.showMessageIfEmpty(response.length);
+      this.showMessageIfEmpty(response.length); // display a message if there are no blogs for the selected topic
       this.currentVal = topic;
+      this.page = 1;
     },
     (error:HttpErrorResponse) => {
-    alert(error.message);
+       alert(error.message);
     }
     );
 }
@@ -104,15 +76,7 @@ public showMessageIfEmpty(len: number){
     else
       this.isVisible = false;
   }
-
-   onTableDataChange(event: any) {
+   onTableDataChange(event: any) { // Used by pagination
       this.page = event;
-      //this.getAllBlogs();
     }
-    onTableSizeChange(event: any): void {
-      this.tableSize = event.target.value;
-      this.page = 1;
-     // this.getAllBlogs();
-    }
-
 }

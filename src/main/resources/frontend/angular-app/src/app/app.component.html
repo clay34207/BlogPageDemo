@@ -1,22 +1,16 @@
-
 <div id = "section-one">
-
   <div id ="toptext">Filter Blogs By Topic</div>
-
-  <div id = "dropdown" >
-    <div class="dropdown">
-      <button class="btn btn-secondary dropdown-toggle" type="button" id="currentValue" data-bs-toggle="dropdown" aria-expanded="false">
-        {{currentVal}}
-      </button>
-      <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-        <li class = "dropdown-item" (click) = "getAllBlogs();">All</li>
-        <li #test (click) = "loadBlogs(topic.Name);" class = "dropdown-item" *ngFor="let topic of topics" [value]="topic.Name">{{topic.Name}}</li>
-
-      </ul>
+  <div id = "dropdown">
+    <input (input)="currentVal=$any($event.target).value" class="form-control" list="datalistOptions" id="exampleDataList" placeholder="Type to search...">
+    <div class = "text-center">
+    <datalist id="datalistOptions">
+      <option value = "All"></option>
+      <option (click) = "loadBlogs(topic.Name);" *ngFor="let topic of topics" [value]="topic.Name">{{topic.Name}}</option>
+    </datalist>
     </div>
-
-
-
+    <button id = "searchBtn" class = "btn btn-secondary" (click) = "currentVal == 'All' ? getAllBlogs() : loadBlogs(currentVal)">
+    Search
+    </button>
   </div>
 </div>
 <div *ngIf="isVisible">
@@ -35,7 +29,7 @@
           let post of posts
             | paginate
               : {
-                  itemsPerPage: tableSize,
+                  itemsPerPage: blogsPerPage,
                   currentPage: page,
                   totalItems: count
                 };
