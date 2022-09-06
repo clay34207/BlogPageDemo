@@ -1,0 +1,68 @@
+
+<div id = "section-one">
+
+  <div id ="toptext">Filter Blogs By Topic</div>
+
+  <div id = "dropdown" >
+    <div class="dropdown">
+      <button class="btn btn-secondary dropdown-toggle" type="button" id="currentValue" data-bs-toggle="dropdown" aria-expanded="false">
+        {{currentVal}}
+      </button>
+      <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+        <li class = "dropdown-item" (click) = "getAllBlogs();">All</li>
+        <li #test (click) = "loadBlogs(topic.Name);" class = "dropdown-item" *ngFor="let topic of topics" [value]="topic.Name">{{topic.Name}}</li>
+
+      </ul>
+    </div>
+
+
+
+  </div>
+</div>
+<div *ngIf="isVisible">
+
+  <div class="card text-center">
+    <div class="card-body">
+      <h5 class="card-title">Not Found</h5>
+      <p class="card-text">There are no blogs about the selected topic.
+        Try filtering by a different topic, or select 'All' from the dropdown to see all blogs.</p>
+    </div>
+  </div>
+</div>
+<div id = "blogs" class="row card-group">
+    <div class = "col-4"
+      *ngFor="
+          let post of posts
+            | paginate
+              : {
+                  itemsPerPage: tableSize,
+                  currentPage: page,
+                  totalItems: count
+                };
+          let i = index
+        "
+    >
+      <div id = "post" class="card">
+        <div class="card-header">
+          {{post.topic}}
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">{{post.title}}</h5>
+          <p class="card-text">{{post.description}}</p>
+          <div>
+            <p id = "left" class="card-text">by {{post.author}}</p>
+            <p id = "date" class="card-text">published: {{post.datePublished}}</p>
+          </div>
+        </div>
+      </div>
+</div>
+
+  <div class="d-flex justify-content-center">
+    <pagination-controls
+      previousLabel="Prev"
+      nextLabel="Next"
+      (pageChange)="onTableDataChange($event)"
+    >
+    </pagination-controls>
+  </div>
+</div>

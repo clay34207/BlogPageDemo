@@ -1,0 +1,56 @@
+.dropdown-menu {
+position:relative;
+  max-height: 29vh;
+  overflow-y: auto;
+  text-align:center;
+}
+
+#blogs {
+padding-top:1%;
+    width: 100%;
+    overflow-y: auto;
+     height: 60vh;
+}
+#section-one {
+  background-color: #C70000;
+
+  height: 40vh;
+  overflow: visible;
+  width: 100%;
+}
+
+#toptext {
+ text-align:center;
+ color:white;
+ font-family: 'Helvetica';
+ font-size:32px;
+}
+
+#dropdown {
+  position:relative;
+  text-align-last:center;
+  display: block;
+  margin: 0 auto;
+  width:80%;
+}
+
+#emptyMessage {
+  visibility:hidden;
+}
+
+#left{
+float:left;
+}
+
+#date {
+float:right;
+}
+
+#post {
+
+}
+
+
+
+
+
